@@ -27,11 +27,11 @@ symbols = [stock['symbol'] for stock in stocks]
 
 api = tradeapi.REST(config.API_KEY, config.SECRET_KEY, base_url=config.BASE_URL)
 barsets = api.get_bars(symbols, TimeFrame.Minute, adjustment='raw').df
+current_date = date.today().isoformat()
 
-orders = api.list_orders()
+orders = api.list_orders(status='all', after=f'{current_date}T13:30:00Z', limit=500)
 existing_order_symbols = [order.symbol for order in orders]
 
-current_date = date.today().isoformat()
 start_minute_bar = f'{current_date} 09:30:00-4:00'
 end_minute_bar = f'{current_date} 09:45:00-4:00'
 

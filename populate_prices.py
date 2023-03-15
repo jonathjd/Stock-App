@@ -13,7 +13,6 @@ cursor.execute("""
     SELECT id, symbol, name FROM stock WHERE symbol NOT LIKE ("%/%")
 """)
 
-
 rows = cursor.fetchall()
 
 symbols = []
